@@ -1,28 +1,14 @@
+import styles from '../Input/Input.module.css';
+
 import React, { Component } from 'react';
 
 export default class Input extends Component {
   state = {
     name: '',
-    tag: '',
-  };
-
-  handleNameChange = event => {
-    // console.log(event.target.value);
-
-    this.setState({ name: event.target.value });
-  };
-
-  handleTagChange = event => {
-    // console.log(event.target.value);
-
-    this.setState({ tag: event.target.value });
+    number: '',
   };
 
   handleChange = event => {
-    // console.log(event.target);
-    // console.log(event.target.name);
-    // console.log(event.target.value);
-
     this.setState({
       [event.target.name]: event.target.value,
     });
@@ -37,33 +23,47 @@ export default class Input extends Component {
   };
 
   reset = () => {
-    this.setState({ name: '', tag: '' });
+    this.setState({ name: '', number: '' });
   };
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Имя{' '}
-          <input
-            name="name"
-            type="text"
-            value={this.state.name}
-            onChange={this.handleChange}
-          ></input>
-        </label>
-        <label>
-          Прозвище{' '}
-          <input
-            name="tag"
-            type="text"
-            value={this.state.tag}
-            onChange={this.handleChange}
-          ></input>
-        </label>
+      <div>
+        <h2 className={styles.mainText}>Телефонная книга</h2>
+        <form className={styles.formWrapper} onSubmit={this.handleSubmit}>
+          <label>
+            <p className={styles.text}> Имя </p>
+            <input
+              className={styles.input}
+              name="name"
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChange}
+              pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+              title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+              required
+            ></input>
 
-        <button type="submit">Отправить форму</button>
-      </form>
+            <p className={styles.text}> Номер </p>
+            <input
+              className={styles.input}
+              name="number"
+              type="tel"
+              value={this.state.number}
+              onChange={this.handleChange}
+              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+              title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+              required
+            ></input>
+          </label>
+
+          <div>
+            <button className={styles.button} type="submit">
+              Добавить контакт
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }
