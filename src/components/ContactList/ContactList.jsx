@@ -1,18 +1,25 @@
 import React from 'react';
-import styles from '../Input/Input.module.css';
+import styles from '../ContactList/ContactList.module.css';
 
-export const ContactList = ({ data, newData }) => {
+export const ContactList = ({ data, deleteContact }) => {
   return (
     <ul>
-         <p className={styles.contactText}>{newData}</p>
-      {data.map(({ name, number }) => (
-        <li>
-          <p className={styles.contactText}>{name}</p>
-     <p className={styles.contactText}>{number}</p>
-   
+      {data.map(({ name, number, id }) => (
+        <li key={id}>
+          <div className={styles.contactWrapper}>
+            <p className={styles.contactText}>{name}:</p>
+            <p className={styles.contactText}>{number}</p>
+            <button
+              type="button"
+              onClick={() => {
+                deleteContact(id);
+              }}
+            >
+              Удалить
+            </button>
+          </div>
         </li>
       ))}
-       
     </ul>
   );
 };

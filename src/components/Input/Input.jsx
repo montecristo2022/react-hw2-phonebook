@@ -6,6 +6,7 @@ export default class Input extends Component {
   state = {
     name: '',
     number: '',
+    
   };
 
   handleChange = event => {
