@@ -19,38 +19,31 @@ export default class App extends Component {
   };
 
   newContact = data => {
-    console.log(data)
- 
+    console.log(data);
+
     const oneContact = {
       id: nanoid(),
       ...data,
     };
 
-    this.alreadyExistName(oneContact)
+    this.alreadyExistName(oneContact);
   };
 
+  alreadyExistName = oneContact => {
+    const { contacts } = this.state;
 
+    for (const contact of contacts) {
+      if (contact.name.toLowerCase() === oneContact.name.toLowerCase()) {
+        alert(`${oneContact.name} is already in contacts`);
 
- 
-
-
-alreadyExistName = oneContact => {
-  const { contacts } = this.state;
-
-  for (const contact of contacts) {
-    if (contact.name.toLowerCase() === oneContact.name.toLowerCase()) {
-      alert(`${oneContact.name} is already in contacts`);
-
-      return;
+        return;
+      }
     }
-  }
 
-  return this.setState(({ contacts }) => ({
-    contacts: [oneContact, ...contacts],
-  }));
-};
-
-
+    return this.setState(({ contacts }) => ({
+      contacts: [oneContact, ...contacts],
+    }));
+  };
 
   changeFilter = e => {
     this.setState({ filter: e.target.value });
@@ -84,7 +77,7 @@ alreadyExistName = oneContact => {
         }}
       >
         <div>
-          <Input onSubmit={this.newContact} />
+          <Input onSubmit={this.newContact} test={this.state.contacts} />
 
           <Filter value={this.state.filter} onChange={this.changeFilter} />
 

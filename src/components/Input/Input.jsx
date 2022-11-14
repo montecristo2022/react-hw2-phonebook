@@ -1,12 +1,12 @@
 import styles from '../Input/Input.module.css';
 
 import React, { Component } from 'react';
+import PropTypes, { array } from 'prop-types';
 
 export default class Input extends Component {
   state = {
     name: '',
     number: '',
-    
   };
 
   handleChange = event => {
@@ -20,7 +20,21 @@ export default class Input extends Component {
     // console.log(this.state)
 
     this.props.onSubmit(this.state);
-    this.reset();
+
+    this.checkTest();
+  };
+
+  checkTest = () => {
+    let countTest = 0;
+    const tests = this.props.test;
+    tests.map(test => {
+      if (this.state.name === test.name) {
+        countTest += 1;
+      }
+    });
+    if (countTest === 0) {
+      this.reset();
+    }
   };
 
   reset = () => {
@@ -68,3 +82,7 @@ export default class Input extends Component {
     );
   }
 }
+
+Input.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
