@@ -1,7 +1,7 @@
 import styles from '../Input/Input.module.css';
 
 import React, { Component } from 'react';
-import PropTypes, { array } from 'prop-types';
+import PropTypes from 'prop-types';
 
 export default class Input extends Component {
   state = {
