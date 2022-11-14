@@ -19,8 +19,6 @@ export default class App extends Component {
   };
 
   newContact = data => {
-    console.log(data);
-
     const oneContact = {
       id: nanoid(),
       ...data,

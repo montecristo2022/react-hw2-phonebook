@@ -27,6 +27,7 @@ export default class Input extends Component {
   checkTest = () => {
     let countTest = 0;
     const tests = this.props.test;
+    // eslint-disable-next-line array-callback-return
     tests.map(test => {
       if (this.state.name === test.name) {
         countTest += 1;
